@@ -1,11 +1,19 @@
 package controlador;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
+import javax.swing.JOptionPane;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -13,13 +21,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Bank;
+import model.Client;
 
-public class Principal_WindowController {
+public class Principal_WindowController implements Initializable{
 
     @FXML
     private Button btnAsignarTurno;
@@ -31,7 +43,7 @@ public class Principal_WindowController {
     private TextField tfCedula;
 
     @FXML
-    private TableView<?> tvClientePrevioAtender;
+    private TableView<Client> tvClientePrevioAtender;
 
     @FXML
     private Button btnAtenderCliente;
@@ -40,17 +52,36 @@ public class Principal_WindowController {
     private Button btonSiguienteTurno;
 
     @FXML
-    private TableView<?> tvClientes;
+    private TableView<Client> tvClientes;
 
     @FXML
-    private TableView<?> tvPrioridad;
+    private TableView<Client> tvPrioridad;
 
     @FXML
     private MenuItem itemMenu;
     
     @FXML
     private CheckBox cbPrioritario;
+    @FXML
     
+    private TableColumn<Client, String> tcFilaClientesNombre;
+
+    @FXML
+    private TableColumn<Client,Integer> tcFilaClientesCedula;
+
+    @FXML
+    private TableColumn<Client, String> tcFilaClientesPNombre;
+
+    @FXML
+    private TableColumn<Client, Integer> tcFilaClientesPCedula;
+
+    
+    
+    private Bank bank;
+    
+    private ObservableList<Client> filaPrioritarios;
+    private ObservableList<Client> filaClientes;
+
     
     /**
      * Este evento es el encargado de asignar a qué fila debería ir un cliente (Clientes o prioridad), al tomar la cedula y el nombre de esta
@@ -71,15 +102,61 @@ public class Principal_WindowController {
         	alert.setTitle("Lo sentimos");
         	alert.setContentText("Rellena todos los campos");
         	alert.showAndWait();
+    	}else {
+    		
+    		if(bank.getHm().containsKey(Integer.parseInt(tfCedula.getText()))) {
+    			int key=Integer.parseInt(tfCedula.getText().toString());
+    			Client client=bank.getHm().get(key);
+    			
+    			bank.asignarTurno(clientePrioritario, client);
+    			actualizarFilas();
+    		}else {
+            	Alert alert=new Alert(AlertType.INFORMATION);
+            	alert.setTitle("Lo sentimos");
+            	alert.setContentText("La cédula ingresada no está registrada en el sistema");
+            	alert.showAndWait();
+    		}
+    		
     	}
+    	
     }
     
 
     
     
     
-
     /**
+     * Este método actualiza las tableView de filas con el nuevo cliente cada vez que se asigna un turno.
+     */
+    private void actualizarFilas() {
+
+		ArrayList<Client> clientesFPrioritario=bank.convertirAArrayList(bank.getFilaPrioritaria());
+		ArrayList<Client> clientesF=bank.convertirAArrayList(bank.getFila());
+
+    	filaClientes = FXCollections.observableArrayList(clientesF);
+    	tvClientes.setItems(filaClientes);
+    	
+    	tcFilaClientesNombre.setCellValueFactory(new PropertyValueFactory<>("name"));
+    	tcFilaClientesCedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
+   
+	
+    	filaPrioritarios = FXCollections.observableArrayList(clientesFPrioritario);
+    	tvPrioridad.setItems(filaPrioritarios);
+    	
+    	tcFilaClientesPNombre.setCellValueFactory(new PropertyValueFactory<>("name"));
+    	tcFilaClientesPCedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
+		
+		JOptionPane.showMessageDialog(null, "El cliente ha sido agregado a la fila satisfactoriamente");
+    	tfCedula.setText("");
+    	tfNombre.setText("");
+	}
+
+
+
+
+
+
+	/**
      * Este evento está encargado de tomar un cliente de las filas, y pasarlo a un estado de "cliente pendiente", donde su información estará 
      * visible en una tableView (Solo se podrá hacer este evento si no hay ningún "cliente pendiente").
      * @param event
@@ -130,6 +207,23 @@ public class Principal_WindowController {
     	stage1.showAndWait();   
     	
     }
+
+
+
+
+
+
+    /**
+     * Este método inicializa la clase banco. 
+     */
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+
+		bank=new Bank();
+		bank.cargarClientes();
+		
+		
+	}
     
     
 }

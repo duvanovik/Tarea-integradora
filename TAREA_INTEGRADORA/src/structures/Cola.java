@@ -5,14 +5,14 @@ import javax.swing.JOptionPane;
 public class Cola<T> {
 
 	private NodoCola inicioCola,finalCola;
+	private int tamano;
 	
 	private String cola="";
 	public Cola() {
 		inicioCola=null;
 		finalCola=null;
+		tamano=0;
 	}
-	
-	
 	
 	public boolean colaVacia() {
 		
@@ -41,6 +41,7 @@ public class Cola<T> {
 		
 		}
 		
+		tamano++;
 	}
 	
 	
@@ -56,6 +57,7 @@ public class Cola<T> {
 				inicioCola=inicioCola.siguiente;
 			}
 		
+			tamano--;
 			return elemento;
 		}else {
 			return null;
@@ -81,6 +83,31 @@ public class Cola<T> {
 		JOptionPane.showMessageDialog(null, colaInvertida);
 		cola="";
 	}
+
+	public NodoCola getInicioCola() {
+		return inicioCola;
+	}
+
+	public void setInicioCola(NodoCola inicioCola) {
+		this.inicioCola = inicioCola;
+	}
+
+	public NodoCola getFinalCola() {
+		return finalCola;
+	}
+
+	public void setFinalCola(NodoCola finalCola) {
+		this.finalCola = finalCola;
+	}
+
+	public int getTamano() {
+		return tamano;
+	}
+
+	public void setTamano(int tamano) {
+		this.tamano = tamano;
+	}
+	
 	
 	
 }
