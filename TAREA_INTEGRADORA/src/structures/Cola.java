@@ -12,6 +12,8 @@ public class Cola<T> {
 		finalCola=null;
 	}
 	
+	
+	
 	public boolean colaVacia() {
 		
 		if(inicioCola==null) {
