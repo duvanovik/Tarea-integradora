@@ -7,7 +7,7 @@ public class ejemplo {
 	
 	public static void main(String[] args) {
 		
-		JOptionPane.showMessageDialog(null, "Holaaaaaaaaaaaaaaaaaaaaaa");
+		JOptionPane.showMessageDialog(null, "Holaaaaaaasasaaaaaaaaaaaaaaaa");
 	}
 	
 }
