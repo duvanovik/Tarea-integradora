@@ -30,6 +30,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Bank;
 import model.Client;
+import structures.Cola;
+
 
 public class Principal_WindowController implements Initializable{
 
@@ -45,6 +47,24 @@ public class Principal_WindowController implements Initializable{
     @FXML
     private TableView<Client> tvClientePrevioAtender;
 
+    @FXML
+    private TableColumn<Client, String> tvClientePrevioAtenderNombre;
+
+    @FXML
+    private TableColumn<Client, Integer> tvClientePrevioAtenderCedula;
+
+    @FXML
+    private TableColumn<Client, String> tvClientePrevioAtenderCuentaBancaria;
+
+    @FXML
+    private TableColumn<Client, Integer> tvClientePrevioAtenderTarjetas;
+
+    @FXML
+    private TableColumn<Client, String> tvClientePrevioAtenderFechaPago;
+
+    @FXML
+    private TableColumn<Client, String> tvClientePrevioAtenderIncorporacion;
+    
     @FXML
     private Button btnAtenderCliente;
 
@@ -86,6 +106,7 @@ public class Principal_WindowController implements Initializable{
     /**
      * Este evento es el encargado de asignar a qué fila debería ir un cliente (Clientes o prioridad), al tomar la cedula y el nombre de esta
      *  que entra al banco.
+     * @author Gustavo Villada
      * @param event
      */
     @FXML
@@ -109,6 +130,7 @@ public class Principal_WindowController implements Initializable{
     			Client client=bank.getHm().get(key);
     			
     			bank.asignarTurno(clientePrioritario, client);
+
     			actualizarFilas();
     		}else {
             	Alert alert=new Alert(AlertType.INFORMATION);
@@ -127,9 +149,10 @@ public class Principal_WindowController implements Initializable{
     
     /**
      * Este método actualiza las tableView de filas con el nuevo cliente cada vez que se asigna un turno.
+     * @author Gustavo Villada
      */
     private void actualizarFilas() {
-
+    	
 		ArrayList<Client> clientesFPrioritario=bank.convertirAArrayList(bank.getFilaPrioritaria());
 		ArrayList<Client> clientesF=bank.convertirAArrayList(bank.getFila());
 
@@ -149,6 +172,7 @@ public class Principal_WindowController implements Initializable{
 		JOptionPane.showMessageDialog(null, "El cliente ha sido agregado a la fila satisfactoriamente");
     	tfCedula.setText("");
     	tfNombre.setText("");
+    	cbPrioritario.setSelected(false);
 	}
 
 
@@ -160,18 +184,52 @@ public class Principal_WindowController implements Initializable{
      * Este evento está encargado de tomar un cliente de las filas, y pasarlo a un estado de "cliente pendiente", donde su información estará 
      * visible en una tableView (Solo se podrá hacer este evento si no hay ningún "cliente pendiente").
      * @param event
+     * @author Gustavo Villada
      */
     @FXML
     void siguiente_turno(ActionEvent event) {
 
+    	Client preAtender=bank.siguienteTurno();
+    	actualizarFilas();
+    	actualizarInformacionCliente(preAtender);
+    	
     }
     
-    
-    /**
+	/**
+     * Este evento está encargado de tomar un cliente de las filas, y pasarlo a un estado de "cliente pendiente", donde su información estará 
+     * visible en una tableView (Solo se podrá hacer este evento si no hay ningún "cliente pendiente").
+     * @param Cliente cuya información se va a mostrar en la tableView
+     * @author Gustavo Villada
+     */
+    private void actualizarInformacionCliente(Client c) {
+
+		ArrayList<Client> clientPrev=new ArrayList<Client>();
+		clientPrev.add(c);
+	    ObservableList<Client> clientePr;
+
+    	clientePr = FXCollections.observableArrayList(clientPrev);
+    	tvClientePrevioAtender.setItems(clientePr);
+    	
+    	tvClientePrevioAtenderNombre.setCellValueFactory(new PropertyValueFactory<>("name"));
+    	tvClientePrevioAtenderCedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
+    	tvClientePrevioAtenderCuentaBancaria.setCellValueFactory(new PropertyValueFactory<>("bankAccount"));
+    	tvClientePrevioAtenderTarjetas.setCellValueFactory(new PropertyValueFactory<>("creditCards"));
+    	tvClientePrevioAtenderFechaPago.setCellValueFactory(new PropertyValueFactory<>("datePaymentCard"));
+    	tvClientePrevioAtenderIncorporacion.setCellValueFactory(new PropertyValueFactory<>("dateIncorporation"));
+   
+    	
+	}
+
+
+
+
+
+	/**
      * Este evento es el encargado de atender al "cliente pendiente" previo a atención (Solo funcionará si hay un cliente pendiente) el cuál 
      * pondrá el "cliente pendiente" como vacío y abrirá una nueva ventana.
      * @param event
      * @throws IOException 
+     * @author Gustavo Villada
      */
     @FXML
     void atender_turno(ActionEvent event) throws IOException {
@@ -193,6 +251,7 @@ public class Principal_WindowController implements Initializable{
      * a un parametro deseado.
      * @param event
      * @throws IOException 
+     * @author Gustavo Villada
      */
     @FXML
     void abrirTablaOrdenar(ActionEvent event) throws IOException {

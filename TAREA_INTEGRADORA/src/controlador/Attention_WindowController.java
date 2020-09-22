@@ -7,6 +7,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
+
 public class Attention_WindowController {
 
     @FXML

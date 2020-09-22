@@ -35,12 +35,12 @@
       <Separator layoutX="14.0" layoutY="387.0" prefHeight="11.0" prefWidth="672.0" />
       <TableView fx:id="tvClientePrevioAtender" layoutX="15.0" layoutY="398.0" prefHeight="81.0" prefWidth="665.0">
          <columns>
-            <TableColumn prefWidth="123.0" text="Nombre" />
-            <TableColumn prefWidth="98.0" text="Cédula" />
-            <TableColumn prefWidth="109.0" text="Cuenta Bancaria" />
-            <TableColumn prefWidth="104.0" text="Tarjetas" />
-            <TableColumn prefWidth="121.0" text="Fecha Pago" />
-            <TableColumn prefWidth="109.0" text="Incorporación" />
+            <TableColumn fx:id="tvClientePrevioAtenderNombre" prefWidth="123.0" text="Nombre" />
+            <TableColumn fx:id="tvClientePrevioAtenderCedula" prefWidth="98.0" text="Cédula" />
+            <TableColumn fx:id="tvClientePrevioAtenderCuentaBancaria" prefWidth="109.0" text="Cuenta Bancaria" />
+            <TableColumn fx:id="tvClientePrevioAtenderTarjetas" prefWidth="104.0" text="Tarjetas" />
+            <TableColumn fx:id="tvClientePrevioAtenderFechaPago" prefWidth="121.0" text="Fecha Pago" />
+            <TableColumn fx:id="tvClientePrevioAtenderIncorporacion" prefWidth="109.0" text="Incorporación" />
          </columns>
       </TableView>
       <Button fx:id="btnAtenderCliente" layoutX="530.0" layoutY="487.0" mnemonicParsing="false" onAction="#atender_turno" prefHeight="43.0" prefWidth="149.0" text="Atender">

@@ -24,7 +24,11 @@ public class Cola<T> {
 		
 	}
 	
-	//Este método inserta al final.
+	/**
+	 * Este método se encarga de insertar un elemento a una Cola de tipo T.
+	 * @param El lemento a insertar en la Cola.
+     * @author Gustavo Villada
+	 */
 	public void insertar(T elemento) {
 		
 		NodoCola nuevo_nodo = new NodoCola(elemento);
@@ -45,6 +49,11 @@ public class Cola<T> {
 	}
 	
 	
+	/**
+	 * Este método se encarga de eliminar el primer elemento agregado a la estructura de datos, y después lo retorna
+	 * @return El elemento en la primera posición en la Cola.
+     * @author Gustavo Villada
+	 */
 	public T extraer() {
 		
 		if(colaVacia()==false) {
@@ -64,7 +73,8 @@ public class Cola<T> {
 		}
 	}
 	
-	//Imprimir en pantalla el comportamiento.
+
+
 	public void mostrarContenido() {
 		NodoCola recorrido= inicioCola;
 		String colaInvertida="";
