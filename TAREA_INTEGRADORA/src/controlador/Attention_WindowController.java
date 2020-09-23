@@ -90,10 +90,10 @@ public class Attention_WindowController{
 
     	int consignacion=Integer.parseInt(tfConsignarDinero.getText().toString());
     	tfConsignarDinero.setText("");
-    	bank.getEnAtencion().getBankAccount().setAmmount(bank.getEnAtencion().getBankAccount().getAmmount()+consignacion);
+    	int consignado=bank.getEnAtencion().consignarDinero(consignacion);
     	
     	DecimalFormat formato = new DecimalFormat("$#,###.###");
-    	String valorFormateado = formato.format(bank.getEnAtencion().getBankAccount().getAmmount());
+    	String valorFormateado = formato.format(consignado);
     	
     	Alert alert=new Alert(AlertType.INFORMATION);
     	alert.setTitle("Transacción realizada");
@@ -103,32 +103,35 @@ public class Attention_WindowController{
     	actualizarInformacionCliente(bank.getEnAtencion());
     }
 
+    
+	/**
+     * Este evento está encargado de retirar dinero a la cuenta bancaria de la persona que está siendo atendida.
+     * @param event
+     * @author Gustavo Villada
+     */
     @FXML
     void retirarDinero(ActionEvent event) {
 
-    	int retiro=Integer.parseInt(tfRetirarDinero.getText().toString());
-    	int montoCliente=bank.getEnAtencion().getBankAccount().getAmmount();
+    	int dineroARetirar=Integer.parseInt(tfRetirarDinero.getText().toString());
     	tfRetirarDinero.setText("");
-    	if((montoCliente-retiro)<0) {
+    	boolean retirado=bank.getEnAtencion().retirarDinero(dineroARetirar);
+    	if(retirado==false) {
         	Alert alert=new Alert(AlertType.INFORMATION);
         	alert.setTitle("Transacción fallida");
         	alert.setContentText("FONDOS INSUFICIENTES");
         	alert.showAndWait();
     	}else {
-    	bank.getEnAtencion().getBankAccount().setAmmount(montoCliente-retiro);
-    	DecimalFormat formato = new DecimalFormat("$#,###.###");
-    	String valorFormateado = formato.format(bank.getEnAtencion().getBankAccount().getAmmount());
-    	
-    	Alert alert=new Alert(AlertType.INFORMATION);
-    	alert.setTitle("Transacción realizada");
-    	alert.setContentText("Retiro exitoso, ahora tienes "+valorFormateado);
-    	alert.showAndWait();
-    	
-    	actualizarInformacionCliente(bank.getEnAtencion());
-    	
+        	DecimalFormat formato = new DecimalFormat("$#,###.###");
+        	String valorFormateado = formato.format(bank.getEnAtencion().getBankAccount().getAmmount());
+        	
+        	Alert alert=new Alert(AlertType.INFORMATION);
+        	alert.setTitle("Transacción realizada");
+        	alert.setContentText("Retiro exitoso, ahora tienes "+valorFormateado);
+        	alert.showAndWait();
+        	
+        	actualizarInformacionCliente(bank.getEnAtencion());
     	}
 
-    	
     }
 
     /**

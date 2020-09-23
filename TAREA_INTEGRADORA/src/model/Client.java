@@ -23,7 +23,38 @@ public class Client {
 		
 	}
 	
+	/**
+	 * con este método retiramos dinero de la cuenta bancaria del cliente
+	 * @param dinero
+	 * @return
+	 * @author Gustavo Villada
+	 */
+	public boolean retirarDinero(int dinero) {
+		
+		if((bankAccount.getAmmount()-dinero)>0) {
+			int amm=bankAccount.getAmmount();
+			bankAccount.setAmmount(amm-dinero);
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
 	
+	
+	/**
+	 * Con este método consignamos dinero a la cuenta bancaria del cliente.
+	 * @param dinero
+	 * @return
+	 * @author Gustavo Villada
+	 */
+	public int consignarDinero(int dinero) {
+		
+		int dineroCuenta=bankAccount.getAmmount();
+		bankAccount.setAmmount(dineroCuenta+dinero);
+		
+		return bankAccount.getAmmount();
+	}
 	
 	public BankAccount getBankAccount() {
 		return bankAccount;

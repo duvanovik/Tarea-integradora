@@ -143,10 +143,7 @@ public class Principal_WindowController implements Initializable{
     	
     }
     
-
-    
-    
-    
+  
     /**
      * Este método actualiza las tableView de filas con el nuevo cliente cada vez que se asigna un turno.
      * @author Gustavo Villada
@@ -173,10 +170,6 @@ public class Principal_WindowController implements Initializable{
     	tfNombre.setText("");
     	cbPrioritario.setSelected(false);
 	}
-
-
-
-
 
 
 	/**
@@ -233,6 +226,14 @@ public class Principal_WindowController implements Initializable{
     @FXML
     void atender_turno(ActionEvent event) throws IOException {
 
+    	if(bank.getPrevioAtender()==null) {
+        	Alert alert=new Alert(AlertType.INFORMATION);
+        	alert.setTitle("Lo sentimos");
+        	alert.setContentText("No hay ningún cliente pendiente.");
+        	alert.showAndWait();
+    		return;
+    	}
+    	
     	FXMLLoader open1= new FXMLLoader(); 
     	open1.setLocation(Main.class.getResource("/vista/Attention_Window.fxml"));
     	Parent root =open1.load();

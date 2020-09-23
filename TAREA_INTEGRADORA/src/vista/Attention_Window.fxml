@@ -24,13 +24,13 @@
          <columns>
             <TableColumn fx:id="tcNombre" prefWidth="140.0" text="Nombre" />
             <TableColumn fx:id="tcCedula" prefWidth="96.0" text="Cédula" />
-            <TableColumn fx:id="tcCuentaBancaria" minWidth="0.0" prefWidth="0.0" text="Cuenta Bancaria" />
-            <TableColumn fx:id="tcTarjeta" prefWidth="145.0" text="Tarjetas" />
-            <TableColumn fx:id="tcFechaPago" prefWidth="152.0" text="Fecha Pago" />
-            <TableColumn fx:id="tcIncorporacion" prefWidth="181.0" text="Incorporación" />
+            <TableColumn fx:id="tcCuentaBancaria" minWidth="0.0" prefWidth="102.0" text="Cuenta Bancaria" />
+            <TableColumn fx:id="tcTarjeta" prefWidth="73.0" text="Tarjetas" />
+            <TableColumn fx:id="tcFechaPago" prefWidth="107.0" text="Fecha Pago" />
+            <TableColumn fx:id="tcIncorporacion" prefWidth="189.0" text="Incorporación" />
          </columns>
       </TableView>
-      <TabPane layoutX="14.0" layoutY="192.0" prefHeight="235.0" prefWidth="715.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="14.0" layoutY="192.0" prefHeight="213.0" prefWidth="715.0" tabClosingPolicy="UNAVAILABLE">
          <tabs>
             <Tab fx:id="tpRetiro" text="Retiro">
                <content>
