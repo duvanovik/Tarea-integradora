@@ -169,7 +169,6 @@ public class Principal_WindowController implements Initializable{
     	tcFilaClientesPNombre.setCellValueFactory(new PropertyValueFactory<>("name"));
     	tcFilaClientesPCedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
 		
-		JOptionPane.showMessageDialog(null, "El cliente ha sido agregado a la fila satisfactoriamente");
     	tfCedula.setText("");
     	tfNombre.setText("");
     	cbPrioritario.setSelected(false);
@@ -234,8 +233,15 @@ public class Principal_WindowController implements Initializable{
     @FXML
     void atender_turno(ActionEvent event) throws IOException {
 
-    	FXMLLoader open= new FXMLLoader(getClass().getResource("/vista/Attention_Window.fxml")); 
-    	Parent root =open.load();
+    	FXMLLoader open1= new FXMLLoader(); 
+    	open1.setLocation(Main.class.getResource("/vista/Attention_Window.fxml"));
+    	Parent root =open1.load();
+    	
+    	Attention_WindowController control =open1.getController();
+       	
+    	bank.setEnAtencion(bank.getPrevioAtender());
+    	control.transferMainClass(bank); //Le pasamos el banco a atencion
+    	
        	Scene scene1 =new Scene(root);
     	Stage stage1 = new Stage();
     	stage1.initModality(Modality.APPLICATION_MODAL);// PARA QUE NO ME PERMITA VOLVER A LA VENTANA ANTERIOR SIN CERRAR LA ACTUAL
