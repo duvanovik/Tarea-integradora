@@ -5,31 +5,30 @@ public class Client {
 	private String name;
 	private int cedula;
 	private int time;
-	private int amount;
-	private String bankAccount;
+	private BankAccount bankAccount;
 	private int creditCards;
 	private String datePaymentCard;
 	private String dateIncorporation;
-
 	
-	
-	public Client(String name, int cedula, int time, int amount, String bankAccount, int creditCards,
+	public Client(String name, int cedula, int time, BankAccount bankAccount, int creditCards,
 			String datePaymentCard, String dateIncorporation) {
 		super();
 		this.name = name;
 		this.cedula = cedula;
 		this.time = time;
-		this.amount = amount;
 		this.bankAccount = bankAccount;
 		this.creditCards = creditCards;
 		this.datePaymentCard = datePaymentCard;
 		this.dateIncorporation = dateIncorporation;
+		
 	}
 	
-	public String getBankAccount() {
+	
+	
+	public BankAccount getBankAccount() {
 		return bankAccount;
 	}
-	public void setBankAccount(String bankAccount) {
+	public void setBankAccount(BankAccount bankAccount) {
 		this.bankAccount = bankAccount;
 	}
 	public int getCreditCards() {
@@ -68,12 +67,8 @@ public class Client {
 	public void setTime(int time) {
 		this.time = time;
 	}
-	public int getAmount() {
-		return amount;
-	}
-	public void setAmount(int amount) {
-		this.amount = amount;
-	}
+
+	
 	
 	
 	
