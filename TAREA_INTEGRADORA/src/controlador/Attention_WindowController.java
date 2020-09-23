@@ -12,11 +12,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import model.Bank;
@@ -53,20 +55,16 @@ public class Attention_WindowController{
     private TableColumn<Client, String> tcIncorporacion;
     
     @FXML
-    private Tab tpRetiro;
-
-    @FXML
-    private Tab tpConsignación;
-
-    @FXML
-    private Tab tpPagoTarjeta;
-
-    @FXML
-    private Tab tpCancelacion;
+    private Tab tpRetiro, tpConsignación, tpPagoTarjeta, tpCancelacion;
     
     @FXML
     private Text txtNumeroTarjeta, txtNombreTarjeta, noCuentaBancaria, dineroCuentaBancaria;
 
+    @FXML
+    private TextField tfRetirarDinero, tfConsignarDinero ;
+    
+    @FXML
+    private Button btnConsignarDinero, btnRetirarDinero;
     
     private Bank bank;
     
@@ -81,6 +79,57 @@ public class Attention_WindowController{
     }
 
 
+    
+	/**
+     * Este evento está encargado de consignar dinero a la cuenta bancaria de la persona que está siendo atendida.
+     * @param event
+     * @author Gustavo Villada
+     */
+    @FXML
+    void consignarDinero(ActionEvent event) {
+
+    	int consignacion=Integer.parseInt(tfConsignarDinero.getText().toString());
+    	tfConsignarDinero.setText("");
+    	bank.getEnAtencion().getBankAccount().setAmmount(bank.getEnAtencion().getBankAccount().getAmmount()+consignacion);
+    	
+    	DecimalFormat formato = new DecimalFormat("$#,###.###");
+    	String valorFormateado = formato.format(bank.getEnAtencion().getBankAccount().getAmmount());
+    	
+    	Alert alert=new Alert(AlertType.INFORMATION);
+    	alert.setTitle("Transacción realizada");
+    	alert.setContentText("Consignación exitosa, ahora tienes "+valorFormateado);
+    	alert.showAndWait();
+    	
+    	actualizarInformacionCliente(bank.getEnAtencion());
+    }
+
+    @FXML
+    void retirarDinero(ActionEvent event) {
+
+    	int retiro=Integer.parseInt(tfRetirarDinero.getText().toString());
+    	int montoCliente=bank.getEnAtencion().getBankAccount().getAmmount();
+    	tfRetirarDinero.setText("");
+    	if((montoCliente-retiro)<0) {
+        	Alert alert=new Alert(AlertType.INFORMATION);
+        	alert.setTitle("Transacción fallida");
+        	alert.setContentText("FONDOS INSUFICIENTES");
+        	alert.showAndWait();
+    	}else {
+    	bank.getEnAtencion().getBankAccount().setAmmount(montoCliente-retiro);
+    	DecimalFormat formato = new DecimalFormat("$#,###.###");
+    	String valorFormateado = formato.format(bank.getEnAtencion().getBankAccount().getAmmount());
+    	
+    	Alert alert=new Alert(AlertType.INFORMATION);
+    	alert.setTitle("Transacción realizada");
+    	alert.setContentText("Retiro exitoso, ahora tienes "+valorFormateado);
+    	alert.showAndWait();
+    	
+    	actualizarInformacionCliente(bank.getEnAtencion());
+    	
+    	}
+
+    	
+    }
 
     /**
      * Este metodo recibe la clase principal del banco que viene de la ventana inicial.

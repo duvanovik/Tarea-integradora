@@ -37,8 +37,8 @@
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="137.0" prefWidth="715.0">
                      <children>
                         <Text layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingresa la cantidad de dinero a retirar." />
-                        <TextField layoutX="14.0" layoutY="59.0" prefHeight="25.0" prefWidth="203.0" />
-                        <Button layoutX="14.0" layoutY="103.0" mnemonicParsing="false" text="Retirar" />
+                        <TextField fx:id="tfRetirarDinero" layoutX="14.0" layoutY="59.0" prefHeight="25.0" prefWidth="203.0" />
+                        <Button fx:id="btnRetirarDinero" layoutX="14.0" layoutY="103.0" mnemonicParsing="false" onAction="#retirarDinero" text="Retirar" />
                      </children></AnchorPane>
                </content>
                <graphic>
@@ -54,8 +54,8 @@
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="185.0" prefWidth="715.0">
                      <children>
                         <Text layoutX="15.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingresa la cantidad de dinero a consignar a la cuenta." />
-                        <TextField layoutX="14.0" layoutY="57.0" prefHeight="25.0" prefWidth="203.0" />
-                        <Button layoutX="15.0" layoutY="103.0" mnemonicParsing="false" text="Consignar" />
+                        <TextField fx:id="tfConsignarDinero" layoutX="14.0" layoutY="57.0" prefHeight="25.0" prefWidth="203.0" />
+                        <Button fx:id="btnConsignarDinero" layoutX="15.0" layoutY="103.0" mnemonicParsing="false" onAction="#consignarDinero" text="Consignar" />
                      </children></AnchorPane>
                </content>
                <graphic>
