@@ -1,12 +1,12 @@
 package interfaces;
 
-import model.Client;
+import structures.NodoStack;
 
 public interface IStack<E>{
 	int size();
 	boolean isEmpty();
 	void push(E e);
-	Client top();
+	NodoStack<E> top();
 	void pop();
 }
 
