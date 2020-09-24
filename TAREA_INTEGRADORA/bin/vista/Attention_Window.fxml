@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="744.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.Attention_WindowController">
+   <children>
+      <TextField fx:id="tfCedulaBusqueda" layoutX="22.0" layoutY="22.0" promptText="Cédula" />
+      <Button fx:id="btnBuscar" layoutX="189.0" layoutY="22.0" mnemonicParsing="false" onAction="#buscarClienteParaAtender" text="Buscar" />
+      <Separator layoutX="14.0" layoutY="54.0" prefHeight="18.0" prefWidth="577.0" />
+      <TableView fx:id="tvInfoCliente" layoutX="14.0" layoutY="63.0" prefHeight="62.0" prefWidth="715.0">
+         <columns>
+            <TableColumn fx:id="tcNombre" prefWidth="140.0" text="Nombre" />
+            <TableColumn fx:id="tcCedula" prefWidth="96.0" text="Cédula" />
+            <TableColumn fx:id="tcCuentaBancaria" minWidth="0.0" prefWidth="102.0" text="Cuenta Bancaria" />
+            <TableColumn fx:id="tcTarjeta" prefWidth="73.0" text="Tarjetas" />
+            <TableColumn fx:id="tcFechaPago" prefWidth="107.0" text="Fecha Pago" />
+            <TableColumn fx:id="tcIncorporacion" prefWidth="189.0" text="Incorporación" />
+         </columns>
+      </TableView>
+      <TabPane layoutX="14.0" layoutY="192.0" prefHeight="213.0" prefWidth="715.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab fx:id="tpRetiro" text="Retiro">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="137.0" prefWidth="715.0">
+                     <children>
+                        <Text layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingresa la cantidad de dinero a retirar." />
+                        <TextField fx:id="tfRetirarDinero" layoutX="14.0" layoutY="59.0" prefHeight="25.0" prefWidth="203.0" />
+                        <Button fx:id="btnRetirarDinero" layoutX="14.0" layoutY="103.0" mnemonicParsing="false" onAction="#retirarDinero" text="Retirar" />
+                     </children></AnchorPane>
+               </content>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../recursos/retirar.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Tab>
+            <Tab fx:id="tpConsignación" text="Consignación">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="185.0" prefWidth="715.0">
+                     <children>
+                        <Text layoutX="15.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingresa la cantidad de dinero a consignar a la cuenta." />
+                        <TextField fx:id="tfConsignarDinero" layoutX="14.0" layoutY="57.0" prefHeight="25.0" prefWidth="203.0" />
+                        <Button fx:id="btnConsignarDinero" layoutX="15.0" layoutY="103.0" mnemonicParsing="false" onAction="#consignarDinero" text="Consignar" />
+                     </children></AnchorPane>
+               </content>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../recursos/consignar.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Tab>
+            <Tab fx:id="tpPagoTarjeta" text="Pago tarjeta">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="156.0" fitWidth="332.0" layoutX="459.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../recursos/Tarjeta-virtual-prepago.png" />
+                           </image>
+                        </ImageView>
+                        <Text fx:id="txtNumeroTarjeta" fill="WHITE" layoutX="477.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5478 2122 1222">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="txtNombreTarjeta" fill="WHITE" layoutX="477.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gustavo Villada">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="477.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="12/02/2018">
+                           <font>
+                              <Font name="System Bold" size="10.0" />
+                           </font>
+                        </Text>
+                        <CheckBox layoutX="14.0" layoutY="49.0" mnemonicParsing="false" text="Efectivo" />
+                        <Text layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Elige el método de pago." />
+                        <CheckBox layoutX="101.0" layoutY="49.0" mnemonicParsing="false" text="Cuenta de ahorros" />
+                        <Text layoutX="14.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cantidad a pagar:" />
+                        <Text layoutX="14.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$ 0,00" />
+                        <TextField layoutX="14.0" layoutY="157.0" />
+                        <Button layoutX="179.0" layoutY="157.0" mnemonicParsing="false" text="Pagar" />
+                     </children></AnchorPane>
+               </content>
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../recursos/pagotarjeta.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Tab>
+            <Tab fx:id="tpCancelacion" text="Cancelación Cuenta">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../recursos/cancelacion.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Tab>
+         </tabs>
+      </TabPane>
+      <Button layoutX="704.0" layoutY="146.0" mnemonicParsing="false" text="&lt;" />
+      <Text layoutX="20.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="No. Cuenta Bancaria" />
+      <Text fx:id="noCuentaBancaria" layoutX="20.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$ 0,000" />
+      <Text layoutX="250.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dinero en la cuenta bancaria" />
+      <Text fx:id="dineroCuentaBancaria" layoutX="250.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$ 0,000" />
+   </children>
+</Pane>
