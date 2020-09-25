@@ -6,21 +6,20 @@ public class Client {
 	private int cedula;
 	private int time;
 	private BankAccount bankAccount;
-	private int creditCards;
 	private String datePaymentCard;
 	private String dateIncorporation;
+	private CreditCard tarjetaDeCredito;
 	
-	public Client(String name, int cedula, int time, BankAccount bankAccount, int creditCards,
-			String datePaymentCard, String dateIncorporation) {
+	public Client(String name, int cedula, int time, BankAccount bankAccount,
+			String datePaymentCard, String dateIncorporation,CreditCard tarjeta) {
 		super();
 		this.name = name;
 		this.cedula = cedula;
 		this.time = time;
 		this.bankAccount = bankAccount;
-		this.creditCards = creditCards;
 		this.datePaymentCard = datePaymentCard;
 		this.dateIncorporation = dateIncorporation;
-		
+		this.tarjetaDeCredito=tarjeta;
 	}
 	
 	/**
@@ -56,17 +55,23 @@ public class Client {
 		return bankAccount.getAmmount();
 	}
 	
+	/**
+	 * Con este método pagamos con la tarjeta de credito del cliente.
+	 * @param dinero
+	 * @return
+	 * @author Andres Cuellar
+	 */
+	public int pagarTarjeta(int dinero) {
+		int dineroAPagar = tarjetaDeCredito.getDeuda();
+		tarjetaDeCredito.setDeuda(dineroAPagar-dinero);
+		return tarjetaDeCredito.getDeuda();
+	}
+	
 	public BankAccount getBankAccount() {
 		return bankAccount;
 	}
 	public void setBankAccount(BankAccount bankAccount) {
 		this.bankAccount = bankAccount;
-	}
-	public int getCreditCards() {
-		return creditCards;
-	}
-	public void setCreditCards(int creditCards) {
-		this.creditCards = creditCards;
 	}
 	public String getDatePaymentCard() {
 		return datePaymentCard;
@@ -97,6 +102,12 @@ public class Client {
 	}
 	public void setTime(int time) {
 		this.time = time;
+	}
+	public CreditCard getTarjetaDeCredito() {
+		return tarjetaDeCredito;
+	}
+	public void setTarjetaDeCredito(CreditCard tarjetaDeCredito) {
+		this.tarjetaDeCredito = tarjetaDeCredito;
 	}
 
 	

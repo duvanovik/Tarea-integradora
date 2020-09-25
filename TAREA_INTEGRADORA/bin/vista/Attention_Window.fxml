@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -90,13 +91,17 @@
                               <Font name="System Bold" size="10.0" />
                            </font>
                         </Text>
-                        <CheckBox layoutX="14.0" layoutY="49.0" mnemonicParsing="false" text="Efectivo" />
                         <Text layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Elige el método de pago." />
-                        <CheckBox layoutX="101.0" layoutY="49.0" mnemonicParsing="false" text="Cuenta de ahorros" />
                         <Text layoutX="14.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cantidad a pagar:" />
-                        <Text layoutX="14.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$ 0,00" />
-                        <TextField layoutX="14.0" layoutY="157.0" />
-                        <Button layoutX="179.0" layoutY="157.0" mnemonicParsing="false" text="Pagar" />
+                        <Text fx:id="txtDinero" layoutX="14.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$ 0,00" />
+                        <TextField fx:id="txtTarjeta" layoutX="14.0" layoutY="157.0" />
+                        <Button fx:id="btnPagar" layoutX="179.0" layoutY="157.0" mnemonicParsing="false" onAction="#PagarConTarjeta" text="Pagar" />
+                        <RadioButton fx:id="efectivo" layoutX="37.0" layoutY="49.0" mnemonicParsing="false" text="Efectivo">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="Metodo" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="cuenta" layoutX="143.0" layoutY="49.0" mnemonicParsing="false" text="Cuenta de ahorros" toggleGroup="$Metodo" />
                      </children></AnchorPane>
                </content>
                <graphic>

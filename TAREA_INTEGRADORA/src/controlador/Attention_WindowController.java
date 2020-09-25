@@ -14,10 +14,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
@@ -68,7 +71,23 @@ public class Attention_WindowController{
 
 	private Bank bank;
 
+	@FXML
+	private Button btnPagar;
 
+	@FXML
+	private TextField txtTarjeta;
+
+	@FXML
+	private Text txtDinero;
+
+	@FXML
+	private ToggleGroup Metodo;
+
+	@FXML
+	private RadioButton cuenta;
+
+	@FXML
+	private RadioButton efectivo;
 
 	@FXML
 	void buscarClienteParaAtender(ActionEvent event) {
@@ -196,4 +215,43 @@ public class Attention_WindowController{
 
 	}
 
+
+	@FXML
+	void PagarConTarjeta(ActionEvent event) {
+		int dinero = Integer.parseInt(txtTarjeta.getText());
+		txtDinero.setText("$"+dinero);
+		
+		if(bank.getEnAtencion().getTarjetaDeCredito().getDeuda()< dinero) {
+
+			Alert alert=new Alert(AlertType.ERROR);
+			alert.setTitle("Pasaste el cupo");
+			alert.setContentText("PASASTE EL VALOR MAXIMO DE TU DEUDA EN LA TARJETA  TU DEUDA ES: " + bank.getEnAtencion().getTarjetaDeCredito().getDeuda());
+			alert.showAndWait();
+			txtTarjeta.clear();
+
+		}
+		else {
+			if(efectivo.isSelected()) {
+				Alert alert=new Alert(AlertType.INFORMATION);
+				alert.setTitle("Has realizado tu pago");
+				alert.setContentText("SE HA REALIZADO TU PAGO TU DEUDA AHORA ES : " + bank.getEnAtencion().pagarTarjeta(dinero));
+				alert.showAndWait();
+				actualizarInformacionCliente(bank.getEnAtencion());
+				txtTarjeta.clear();
+			}
+			if(cuenta.isSelected()) {
+				int valorDeLaCuenta = bank.getEnAtencion().getBankAccount().getAmmount();
+				bank.getEnAtencion().getBankAccount().setAmmount(valorDeLaCuenta-dinero);
+				Alert alert=new Alert(AlertType.INFORMATION);
+				alert.setTitle("Has realizado tu pago");
+				alert.setContentText("SE HA REALIZADO TU PAGO TU DEUDA AHORA ES : " + bank.getEnAtencion().pagarTarjeta(dinero) 
+						+" Y TU CUENTA DE AHORROS AHORA TIENE: " + bank.getEnAtencion().getBankAccount().getAmmount());
+				alert.showAndWait();
+				actualizarInformacionCliente(bank.getEnAtencion());
+				txtTarjeta.clear();
+			}
+		}
+
+
+	}
 }

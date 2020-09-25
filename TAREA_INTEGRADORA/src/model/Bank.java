@@ -98,20 +98,20 @@ public class Bank {
 	public void cargarClientes() {
 
 		BankAccount ba=new BankAccount("1213-2123", 3500000);
-		Client client= new Client("Gustavo Villada", 11111, 15, ba, 1, "12-12-2012", "18-May-2009");
+		Client client= new Client("Gustavo Villada", 11111, 15, ba, "12-12-2012", "18-May-2009",new CreditCard(40000));
 		hasMBaseDatosClientes.put(client.getCedula(), client);
 
 		ba=new BankAccount("6541-0872", 4500000);
-		client= new Client("Oscar Villada", 22222, 25 , ba, 1, "12-12-2012", "18-May-2009");
+		client= new Client("Oscar Villada", 22222, 25 , ba, "12-12-2012", "18-May-2009",new CreditCard(5500));
 		hasMBaseDatosClientes.put(client.getCedula(), client);
 
 		ba=new BankAccount("2165-4588", 1220000);
-		client= new Client("Wanda Villacorte", 33333, 45, ba, 1, "12-12-2012", "18-May-2009");
+		client= new Client("Wanda Villacorte", 33333, 45, ba, "12-12-2012", "18-May-2009",new CreditCard(12222));
 		hasMBaseDatosClientes.put(client.getCedula(), client);
 		
 		
 		ba=new BankAccount("1247-9762", 3330000);
-		client= new Client("Ana Villada", 44444, 65, ba, 1, "12-12-2012", "18-May-2009");
+		client= new Client("Ana Villada", 44444, 65, ba, "12-12-2012", "18-May-2009",new CreditCard(0));
 		hasMBaseDatosClientes.put(client.getCedula(), client);
 		
 	
