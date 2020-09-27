@@ -1,6 +1,6 @@
 package model;
 
-public class BankAccount {
+public class BankAccount implements Cloneable {
 
 	private String id;
 	private int ammount;
@@ -24,6 +24,14 @@ public class BankAccount {
 		this.ammount = ammount;
 	}
 	
-	
+	/**
+	 * Con este método clonamos el cuenta de banco.
+	 * @param 
+	 * @return
+	 * @author Andres Cuellar
+	 */
+	public BankAccount clone() {
+		return new BankAccount(id, ammount);
+	}
 	
 }

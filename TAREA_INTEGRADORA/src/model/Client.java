@@ -1,6 +1,9 @@
 package model;
 
-public class Client {
+import excepciones.StackVacioException;
+import structures.Stack;
+
+public class Client implements Cloneable{
 
 	private String name;
 	private int cedula;
@@ -9,7 +12,8 @@ public class Client {
 	private String datePaymentCard;
 	private String dateIncorporation;
 	private CreditCard tarjetaDeCredito;
-	
+	private Stack<Client> copiaOperaciones;
+
 	public Client(String name, int cedula, int time, BankAccount bankAccount,
 			String datePaymentCard, String dateIncorporation,CreditCard tarjeta) {
 		super();
@@ -20,8 +24,9 @@ public class Client {
 		this.datePaymentCard = datePaymentCard;
 		this.dateIncorporation = dateIncorporation;
 		this.tarjetaDeCredito=tarjeta;
+		copiaOperaciones = new Stack<Client>();
 	}
-	
+
 	/**
 	 * con este método retiramos dinero de la cuenta bancaria del cliente
 	 * @param dinero
@@ -29,18 +34,19 @@ public class Client {
 	 * @author Gustavo Villada
 	 */
 	public boolean retirarDinero(int dinero) {
-		
+
 		if((bankAccount.getAmmount()-dinero)>0) {
+			copiaOperaciones.push(this.clone());
 			int amm=bankAccount.getAmmount();
 			bankAccount.setAmmount(amm-dinero);
 			return true;
 		}else {
 			return false;
 		}
-		
+
 	}
-	
-	
+
+
 	/**
 	 * Con este método consignamos dinero a la cuenta bancaria del cliente.
 	 * @param dinero
@@ -49,24 +55,49 @@ public class Client {
 	 */
 	public int consignarDinero(int dinero) {
 		
+		copiaOperaciones.push(this.clone());
 		int dineroCuenta=bankAccount.getAmmount();
 		bankAccount.setAmmount(dineroCuenta+dinero);
-		
+
 		return bankAccount.getAmmount();
 	}
-	
+
 	/**
 	 * Con este método pagamos con la tarjeta de credito del cliente.
-	 * @param dinero
+	 * @param dinero, cual
+	 * @return la deuda con la que el cliente queda
+	 * @author Andres Cuellar
+	 */
+	public int pagarTarjeta(int dinero, int cual) {
+		int v=0;
+		copiaOperaciones.push(this.clone());
+		if(cual ==1) {
+		int dineroAPagar = tarjetaDeCredito.getDeuda();
+		tarjetaDeCredito.setDeuda(dineroAPagar-dinero);
+		v= tarjetaDeCredito.getDeuda();
+		}
+		else if(cual == 2) {
+			int valorDeLaCuenta = bankAccount.getAmmount();
+			this.getBankAccount().setAmmount(valorDeLaCuenta-dinero);
+			int dineroAPagar = tarjetaDeCredito.getDeuda();
+			tarjetaDeCredito.setDeuda(dineroAPagar-dinero);
+			v= tarjetaDeCredito.getDeuda();
+		}
+		return v;
+	}
+
+	/**
+	 * Con este método damos  la copia del cliente antes de la  operacion .
+	 * @param 
 	 * @return
 	 * @author Andres Cuellar
 	 */
-	public int pagarTarjeta(int dinero) {
-		int dineroAPagar = tarjetaDeCredito.getDeuda();
-		tarjetaDeCredito.setDeuda(dineroAPagar-dinero);
-		return tarjetaDeCredito.getDeuda();
+	public Client darCopia() throws StackVacioException {
+		Client c = copiaOperaciones.top().getValue();
+		copiaOperaciones.pop();
+		return c;
 	}
-	
+
 	public BankAccount getBankAccount() {
 		return bankAccount;
 	}
@@ -110,8 +141,24 @@ public class Client {
 		this.tarjetaDeCredito = tarjetaDeCredito;
 	}
 
-	
-	
-	
-	
+	public Stack<Client> getCopiaOperaciones() {
+		return copiaOperaciones;
+	}
+
+	public void setCopiaOperaciones(Stack<Client> copiaOperaciones) {
+		this.copiaOperaciones = copiaOperaciones;
+	}
+
+	/**
+	 * Con este método clonamos el cliente.
+	 * @param 
+	 * @return
+	 * @author Andres Cuellar
+	 */
+	public Client clone() {
+		return new Client( name,  cedula,  time,  bankAccount.clone(),
+				 datePaymentCard,  dateIncorporation, tarjetaDeCredito.clone());
+	}
+
+
 }

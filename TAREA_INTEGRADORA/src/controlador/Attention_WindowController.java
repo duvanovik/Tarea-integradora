@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
+import excepciones.StackVacioException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -88,6 +89,7 @@ public class Attention_WindowController{
 
 	@FXML
 	private RadioButton efectivo;
+
 
 	@FXML
 	void buscarClienteParaAtender(ActionEvent event) {
@@ -215,9 +217,14 @@ public class Attention_WindowController{
 
 	}
 
-
+	/**
+	 * Este evento está encargado de Pagar el dinero que debe el cliente por el uso de la tarjeta.
+	 * @param event
+	 * @author Andres Cuellar
+	 */
 	@FXML
-	void PagarConTarjeta(ActionEvent event) {
+	void PagarConTarjeta(ActionEvent event)  {
+		try {
 		int dinero = Integer.parseInt(txtTarjeta.getText());
 		txtDinero.setText("$"+dinero);
 		
@@ -231,27 +238,66 @@ public class Attention_WindowController{
 
 		}
 		else {
+			
 			if(efectivo.isSelected()) {
+				int cual=0;
+				cual=1;
 				Alert alert=new Alert(AlertType.INFORMATION);
 				alert.setTitle("Has realizado tu pago");
-				alert.setContentText("SE HA REALIZADO TU PAGO TU DEUDA AHORA ES : " + bank.getEnAtencion().pagarTarjeta(dinero));
+				alert.setContentText("SE HA REALIZADO TU PAGO TU DEUDA AHORA ES : " + bank.getEnAtencion().pagarTarjeta(dinero , cual));
 				alert.showAndWait();
 				actualizarInformacionCliente(bank.getEnAtencion());
 				txtTarjeta.clear();
 			}
 			if(cuenta.isSelected()) {
-				int valorDeLaCuenta = bank.getEnAtencion().getBankAccount().getAmmount();
-				bank.getEnAtencion().getBankAccount().setAmmount(valorDeLaCuenta-dinero);
+				int cual=0;
+				cual=2;
+
 				Alert alert=new Alert(AlertType.INFORMATION);
 				alert.setTitle("Has realizado tu pago");
-				alert.setContentText("SE HA REALIZADO TU PAGO TU DEUDA AHORA ES : " + bank.getEnAtencion().pagarTarjeta(dinero) 
+				alert.setContentText("SE HA REALIZADO TU PAGO TU DEUDA AHORA ES : " + bank.getEnAtencion().pagarTarjeta(dinero,cual) 
 						+" Y TU CUENTA DE AHORROS AHORA TIENE: " + bank.getEnAtencion().getBankAccount().getAmmount());
 				alert.showAndWait();
 				actualizarInformacionCliente(bank.getEnAtencion());
 				txtTarjeta.clear();
 			}
+			if(!cuenta.isSelected() && !efectivo.isSelected()) {
+				Alert alert=new Alert(AlertType.ERROR);
+				alert.setTitle("No selecciono");
+				alert.setContentText("POR FAVOR SELECCIONE UNA DE LAS OPCIONES" );
+				alert.showAndWait();
+				txtTarjeta.clear();
+			}
+		}
+		}catch (NumberFormatException e) {
+			Alert alert=new Alert(AlertType.ERROR);
+			alert.setTitle("No hay nada");
+			alert.setContentText("POR FAVOR DIGITE LA CANTIDAD QUE DESEA PAGAR" );
+			alert.showAndWait();
+			txtTarjeta.clear();
 		}
 
 
 	}
+	
+	/**
+	 * Este evento está encargado dedeshacer las acciones del cliente.
+	 * @param event
+	 * @author Andres Cuellar
+	 */
+	@FXML
+	void Deshacer(ActionEvent event) throws StackVacioException {
+		
+		Client aux = bank.getEnAtencion().darCopia();
+		bank.setEnAtencion(aux);
+		actualizarInformacionCliente(bank.getEnAtencion());
+		Alert alert=new Alert(AlertType.INFORMATION);
+		alert.setTitle("Se deshizo la operacion");
+		alert.setContentText("SE DESHIZO LA ULTIMA OPERACION " );
+		alert.showAndWait();
+		
+		
+	
+	}
+
 }
