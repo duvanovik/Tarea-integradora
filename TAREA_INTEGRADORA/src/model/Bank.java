@@ -250,6 +250,7 @@ public class Bank {
 					mergedSortedArray.add((Client)customers.get(right));
 					right++;
 				}
+				
 			}       
 	    
 			//Either of below while loop will execute
