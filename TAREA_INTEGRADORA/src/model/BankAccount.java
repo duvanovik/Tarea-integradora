@@ -1,5 +1,7 @@
 package model;
 
+
+
 public class BankAccount implements Cloneable {
 
 	private String id;
@@ -22,6 +24,14 @@ public class BankAccount implements Cloneable {
 	}
 	public void setAmmount(int ammount) {
 		this.ammount = ammount;
+	}
+	public int compareByAmount(BankAccount u) {
+		if(ammount == u.getAmmount())
+			return 0;
+		else if(ammount > u.getAmmount())
+			return 1;
+		else
+			return -1;
 	}
 	
 	/**

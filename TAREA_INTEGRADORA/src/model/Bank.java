@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.swing.JOptionPane; 
+import javax.swing.JOptionPane;
+
+
 import structures.Cola;
 
 public class Bank {
@@ -271,6 +273,35 @@ public class Bank {
 				customers.set(j, mergedSortedArray.get(i++));
 				j++;
 			}
+		}
+		
+		private ArrayList<Client> quickSort(ArrayList<Client> list)
+		{
+		    if (list.size() <= 1) 
+		       return list; // Already sorted  
+
+		    ArrayList<Client> sorted = new ArrayList<Client>();
+		    ArrayList<Client> lesser = new ArrayList<Client>();
+		    ArrayList<Client> greater = new ArrayList<Client>();
+		    Client pivot = list.get(list.size()-1); // Use last Vehicle as pivot
+		    for (int i = 0; i < list.size()-1; i++)
+		    {
+		        //int order = list.get(i).compareTo(pivot);
+		        if (list.get(i).getBankAccount().compareByAmount(pivot.getBankAccount()) < 0)
+		            lesser.add(list.get(i));    
+		        else
+		            greater.add(list.get(i));   
+		    }
+
+		    lesser = quickSort(lesser);
+		    greater = quickSort(greater);
+
+		    lesser.add(pivot);
+		    lesser.addAll(greater);
+		    sorted = lesser;
+		    
+		    return sorted;
+
 		}
 	
 	/**
