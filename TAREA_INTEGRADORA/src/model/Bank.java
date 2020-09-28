@@ -2,9 +2,9 @@ package model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-import javax.swing.JOptionPane;
-
+import javax.swing.JOptionPane; 
 import structures.Cola;
 
 public class Bank {
@@ -186,6 +186,8 @@ public class Bank {
 	public void setDesertor(ArrayList<Client> desertor) {
 		this.desertor = desertor;
 	}
+	
+	//sort by id using the selection algorithm.
 	  public void sortById( )
 	    {
 	        int initial;
@@ -216,6 +218,59 @@ public class Bank {
 
 	        }
 	    }
+		public void sortClientsByName() {       
+			divide(0, customers.size()-1);
+	    }
+		private void divide(int start,int end){
+	        
+	        //Divide till you breakdown your list to single element
+	        if(start<end && (end-start)>=1){
+	            int mid = (end + start)/2;
+	            divide(start, mid);
+	            divide(mid+1, end);        
+	            
+	            //merging Sorted array produce above into one sorted array
+	            merge(start,mid,end);            
+	        }       
+	    } 
+		private void merge(int start,int mid,int end){
+	    
+			//Below is the mergedarray that will be sorted array Array[i-mid] , Array[(mid+1)-end]
+			List<Client> mergedSortedArray = new ArrayList<Client>();
+	    
+			int left = start;
+			int right = mid+1;
+			Client u1 = (Client)customers.get(left);
+			Client u2 = (Client)customers.get(right);
+			while(left<=mid && right<=end){
+				if(u1.getName().compareTo(u2.getName())<0){
+					mergedSortedArray.add((Client)customers.get(left));
+					left++;
+				}else{
+					mergedSortedArray.add((Client)customers.get(right));
+					right++;
+				}
+			}       
+	    
+			//Either of below while loop will execute
+			while(left<=mid){
+				mergedSortedArray.add((Client)customers.get(left));
+				left++;
+			}
+	    
+			while(right<=end){
+				mergedSortedArray.add((Client)customers.get(right));
+				right++;
+			}
+	    
+			int i = 0;
+			int j = start;
+			//Setting sorted array to original one
+			while(i<mergedSortedArray.size()){
+				customers.set(j, mergedSortedArray.get(i++));
+				j++;
+			}
+		}
 	
 	/**
 	 * Con este método mostramos los clientes que desertaron del banco.
