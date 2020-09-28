@@ -18,6 +18,8 @@ public class Bank {
 	private Client previoAtender;
 	private Client enAtencion;
 	
+	private ArrayList<Client> desertor;
+	
 	public Bank() {
 		hasMBaseDatosClientes=new HashMap<Integer, Client>();
 		fila=new Cola<Client>();
@@ -25,6 +27,7 @@ public class Bank {
 		previoAtender=null;
 		enAtencion=null;
 		cargarClientes();
+		desertor= new ArrayList<Client>();
 	}
 	
 	
@@ -116,6 +119,19 @@ public class Bank {
 		
 	
 	}
+	/**
+	 * Con este método borramos la cuenta el cliente.
+	 * @param 
+	 * @return
+	 * @author Andres Cuellar
+	 */
+	
+	public void cancelarCuenta() {
+		Client client= hasMBaseDatosClientes.get(enAtencion.getCedula());
+		hasMBaseDatosClientes.remove(client.getCedula());
+		setEnAtencion(null);
+		desertor.add(client);
+	}
 
 	public HashMap<Integer, Client> getHm() {
 		return hasMBaseDatosClientes;
@@ -156,7 +172,26 @@ public class Bank {
 	public void setEnAtencion(Client enAtencion) {
 		this.enAtencion = enAtencion;
 	}
+
+	public ArrayList<Client> getDesertor() {
+		return desertor;
+	}
+
+	public void setDesertor(ArrayList<Client> desertor) {
+		this.desertor = desertor;
+	}
 	
+	/**
+	 * Con este método mostramos los clientes que desertaron del banco.
+	 * @param 
+	 * @return
+	 * @author Andres Cuellar
+	 */
+	public void mostrarDesertores() {
+		for (int i = 0; i < desertor.size(); i++) {
+			System.out.println(desertor.get(i).getName());
+		}
+	}
 	
 	
 	

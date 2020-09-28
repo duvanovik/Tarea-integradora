@@ -89,6 +89,9 @@ public class Attention_WindowController{
 
 	@FXML
 	private RadioButton efectivo;
+	
+	@FXML
+    private Button btCancelar;
 
 
 	@FXML
@@ -281,13 +284,13 @@ public class Attention_WindowController{
 	}
 	
 	/**
-	 * Este evento está encargado dedeshacer las acciones del cliente.
+	 * Este evento está encargado de deshacer las acciones del cliente.
 	 * @param event
 	 * @author Andres Cuellar
 	 */
 	@FXML
 	void Deshacer(ActionEvent event) throws StackVacioException {
-		
+		try {
 		Client aux = bank.getEnAtencion().darCopia();
 		bank.setEnAtencion(aux);
 		actualizarInformacionCliente(bank.getEnAtencion());
@@ -295,9 +298,42 @@ public class Attention_WindowController{
 		alert.setTitle("Se deshizo la operacion");
 		alert.setContentText("SE DESHIZO LA ULTIMA OPERACION " );
 		alert.showAndWait();
-		
+		}catch (StackVacioException e) {
+			Alert alert=new Alert(AlertType.ERROR);
+			alert.setTitle("Sin operaciones");
+			alert.setContentText("NO SE HAN REGISTRADO OPERACIONES " );
+			alert.showAndWait();
+		}catch (NullPointerException e) {
+			Alert alert=new Alert(AlertType.ERROR);
+			alert.setTitle("Se han borrado");
+			alert.setContentText("NO SE HAN REGISTRADO CLIENTES " );
+			alert.showAndWait();
+		}
 		
 	
 	}
+	
+	
+	/**
+	 * Este evento está encargado de borrar los datos de cuenta bancaria del cliente.
+	 * @param event
+	 * @author Andres Cuellar
+	 */
+    @FXML
+    void Cancelar(ActionEvent event) {
+
+    	try {
+    	bank.cancelarCuenta();
+    	noCuentaBancaria.setText("$ 0,000");
+    	dineroCuentaBancaria.setText("$ 0,000");
+    	actualizarInformacionCliente(bank.getEnAtencion());
+    	
+    	}catch (NullPointerException e) {
+    		Alert alert=new Alert(AlertType.INFORMATION);
+    		alert.setTitle("Borrar Cliente");
+    		alert.setContentText("SE HA BORRADO EL CLIENTE " );
+    		alert.showAndWait();
+		}
+    }
 
 }

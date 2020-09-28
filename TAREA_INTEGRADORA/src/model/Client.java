@@ -94,9 +94,15 @@ public class Client implements Cloneable{
 	 * @author Andres Cuellar
 	 */
 	public Client darCopia() throws StackVacioException {
-		Client c = copiaOperaciones.top().getValue();
+		Client c;
+		if(copiaOperaciones.isEmpty()) {
+			throw new StackVacioException("NO SE HAN REGISTRADO OPERACIONES");
+		}
+		else {
+		 c = copiaOperaciones.top().getValue();
 		copiaOperaciones.pop();
 		return c;
+		}
 	}
 
 	public BankAccount getBankAccount() {
