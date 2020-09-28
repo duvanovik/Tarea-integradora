@@ -1,5 +1,6 @@
 package model;
 
+
 import excepciones.StackVacioException;
 import model.Client;
 import structures.Stack;
@@ -155,18 +156,13 @@ public class Client implements Cloneable{
 	public void setCopiaOperaciones(Stack<Client> copiaOperaciones) {
 		this.copiaOperaciones = copiaOperaciones;
 	}
-	public int compareByName(Client c) {
-		int comparasionValue = name.compareToIgnoreCase(c.getName());
-		if(comparasionValue < 0) {
-			comparasionValue = -1;
-		}
-		else if(comparasionValue == 0) {
-			comparasionValue = 0;
-		}
-		else {
-			comparasionValue = 1;
-		}
-		return comparasionValue;
+	public int compararPorId(Client c) {
+		if(cedula == c.getCedula())
+			return 0;
+		else if(cedula > c.getCedula())
+			return 1;
+		else
+			return -1;
 	}
 
 	/**

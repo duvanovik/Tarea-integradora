@@ -20,7 +20,10 @@ public class Bank {
 	
 	private ArrayList<Client> desertor;
 	
+	private ArrayList<Client> customers;
+	
 	public Bank() {
+		customers = new ArrayList<Client>();
 		hasMBaseDatosClientes=new HashMap<Integer, Client>();
 		fila=new Cola<Client>();
 		filaPrioritaria=new Cola<Client>();
@@ -103,14 +106,17 @@ public class Bank {
 		BankAccount ba=new BankAccount("1213-2123", 3500000);
 		Client client= new Client("Gustavo Villada", 11111, 15, ba, "12-12-2012", "18-May-2009",new CreditCard(40000));
 		hasMBaseDatosClientes.put(client.getCedula(), client);
+		customers.add(client);
 
 		ba=new BankAccount("6541-0872", 4500000);
 		client= new Client("Oscar Villada", 22222, 25 , ba, "12-12-2012", "18-May-2009",new CreditCard(5500));
 		hasMBaseDatosClientes.put(client.getCedula(), client);
+		customers.add(client);
 
 		ba=new BankAccount("2165-4588", 1220000);
 		client= new Client("Wanda Villacorte", 33333, 45, ba, "12-12-2012", "18-May-2009",new CreditCard(12222));
 		hasMBaseDatosClientes.put(client.getCedula(), client);
+		customers.add(client);
 		
 		
 		ba=new BankAccount("1247-9762", 3330000);
@@ -180,6 +186,36 @@ public class Bank {
 	public void setDesertor(ArrayList<Client> desertor) {
 		this.desertor = desertor;
 	}
+	  public void sortById( )
+	    {
+	        int initial;
+
+	        for( initial = 0; initial < customers.size( ); initial++ )
+	        {
+	            int minorPosition = initial;
+	            Client minorCustomer = ( Client )customers.get( initial );
+
+	            // Buscar el perro de menor edad entre inicial y final
+	            for( int i = initial + 1; i < customers.size( ); i++ )
+	            {
+	                Client positionCustomer = ( Client )customers.get( i );
+
+	                if( positionCustomer.compararPorId(minorCustomer ) < 0 )
+	                {
+	                    minorCustomer = positionCustomer;
+	                    minorPosition = i;
+	                }
+	            }
+
+	            if( minorPosition != initial )
+	            {
+	                Client temp = ( Client )customers.get( initial );
+	                customers.set( initial, minorCustomer );
+	                customers.set( minorPosition, temp );
+	            }
+
+	        }
+	    }
 	
 	/**
 	 * Con este método mostramos los clientes que desertaron del banco.
