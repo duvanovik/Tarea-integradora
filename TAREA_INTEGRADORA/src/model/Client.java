@@ -15,6 +15,7 @@ public class Client implements Cloneable{
 	private String dateIncorporation;
 	private CreditCard tarjetaDeCredito;
 	private Stack<Client> copiaOperaciones;
+	private int monto;
 
 	public Client(String name, int cedula, int time, BankAccount bankAccount,
 			String datePaymentCard, String dateIncorporation,CreditCard tarjeta) {
@@ -27,6 +28,7 @@ public class Client implements Cloneable{
 		this.dateIncorporation = dateIncorporation;
 		this.tarjetaDeCredito=tarjeta;
 		copiaOperaciones = new Stack<Client>();
+		this.monto= bankAccount.getAmmount();
 	}
 
 	/**
@@ -163,6 +165,19 @@ public class Client implements Cloneable{
 			return 1;
 		else
 			return -1;
+	}
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return name + "	" + monto + "\n";
+	}
+
+	public int getMonto() {
+		return monto;
+	}
+
+	public void setMonto(int monto) {
+		this.monto = monto;
 	}
 
 	/**

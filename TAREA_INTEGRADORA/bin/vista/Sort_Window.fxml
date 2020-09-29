@@ -38,7 +38,7 @@
             <TableColumn fx:id="tcName" prefWidth="168.0" text="Nombre" />
             <TableColumn fx:id="tcCedula" prefWidth="158.0" text="Cedula" />
             <TableColumn prefWidth="147.0" text="Tiempo Vinculación" />
-            <TableColumn fx:id="tcMonto" prefWidth="163.0" text="Monto" />
+            <TableColumn fx:id="tcAmount" prefWidth="163.0" text="Monto" />
          </columns>
       </TableView>
       <Text layoutX="14.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Elige por cuál parámetro deseas ordenar a los clientes">

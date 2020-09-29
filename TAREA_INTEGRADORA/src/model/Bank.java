@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -111,12 +112,12 @@ public class Bank {
 		customers.add(client);
 
 		ba=new BankAccount("6541-0872", 4500000);
-		client= new Client("Oscar Villada", 22222, 25 , ba, "12-12-2012", "18-May-2009",new CreditCard(5500));
+		client= new Client("Oscar Villada", 22222, 25, ba, "12-12-2012", "18-May-2009",new CreditCard(5500));
 		hasMBaseDatosClientes.put(client.getCedula(), client);
 		customers.add(client);
 
 		ba=new BankAccount("2165-4588", 1220000);
-		client= new Client("Wanda Villacorte", 33333, 45, ba, "12-12-2012", "18-May-2009",new CreditCard(12222));
+		client= new Client("Wanda Villacorte", 33333, 45,  ba, "12-12-2012", "18-May-2009",new CreditCard(12222));
 		hasMBaseDatosClientes.put(client.getCedula(), client);
 		customers.add(client);
 		
@@ -275,6 +276,8 @@ public class Bank {
 			}
 		}
 		
+	
+		
 		private ArrayList<Client> quickSort(ArrayList<Client> list)
 		{
 		    if (list.size() <= 1) 
@@ -303,12 +306,17 @@ public class Bank {
 		    return sorted;
 
 		}
+	public void sortByAmount() {
+			customers = quickSort(customers);
+		}
 	
 	public ArrayList<Client> getCustomers() {
 			return customers;
 		}
 
-
+	public void mostrar() {
+		System.out.print(Arrays.toString(customers.toArray()));
+	}
 
 	/**
 	 * Con este método mostramos los clientes que desertaron del banco.
@@ -321,10 +329,7 @@ public class Bank {
 			System.out.println(desertor.get(i).getName());
 		}
 	}
-	
-	
-	
-	
+
 	
 	
 	

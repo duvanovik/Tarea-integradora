@@ -17,6 +17,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Bank;
+import model.BankAccount;
 import model.Client;
 
 	public class Sort_WindowController implements Initializable {
@@ -43,7 +44,7 @@ import model.Client;
 	    private TableColumn<Client, Integer> tcCedula;
 
 	    @FXML
-	    private TableColumn<Client, Double> tcMonto;
+	    private TableColumn<Client, Integer> tcAmount;
 	 
 
 	    /**
@@ -69,6 +70,11 @@ import model.Client;
 				   ordenarPorNombre();
 				   System.out.println("xd2");
 			   }
+			   else if(cboxParametrosOrdenar.getValue().equals("MONTO")) {
+				   b.sortByAmount();
+				   ordenarPorMonto();
+				   System.out.println("xd3");
+			   }
 		}
 		   
 		public void ordenarPorCedula() {
@@ -77,6 +83,7 @@ import model.Client;
 			tvClientes.setItems(filaClientes);
 	    	tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
 	    	tcCedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
+	    	tcAmount.setCellValueFactory(new PropertyValueFactory<>("monto"));
 
 		}
 		public void ordenarPorNombre() {
@@ -85,6 +92,15 @@ import model.Client;
 			tvClientes.setItems(filaClientes);
 			tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
 	    	tcCedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
+	    	tcAmount.setCellValueFactory(new PropertyValueFactory<>("monto"));
+		}
+		public void ordenarPorMonto() {
+			ArrayList<Client> customers = b.getCustomers();
+			filaClientes = FXCollections.observableArrayList(customers);
+			tvClientes.setItems(filaClientes);
+			tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
+	    	tcCedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
+	    	tcAmount.setCellValueFactory(new PropertyValueFactory<>("monto"));
 		}
 
 		/**
