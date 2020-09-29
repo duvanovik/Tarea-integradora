@@ -149,7 +149,7 @@ public class Principal_WindowController implements Initializable{
      * @author Gustavo Villada
      */
     private void actualizarFilas() {
-    	
+    
 		ArrayList<Client> clientesFPrioritario=bank.convertirAArrayList(bank.getFilaPrioritaria());
 		ArrayList<Client> clientesF=bank.convertirAArrayList(bank.getFila());
 

@@ -13,7 +13,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import model.Bank;
+import model.Client;
 
 	public class Sort_WindowController implements Initializable {
 
@@ -22,25 +26,66 @@ import javafx.scene.control.TableView;
 	    private ComboBox<String> cboxParametrosOrdenar;
 
 	    @FXML
-	    private TableView<?> tvClientes;
+	    private TableView<Client> tvClientes;
 
 	    @FXML
 	    private Button btnOrdenar;
+	    
+	    private Bank b;
+	    
+	    private ObservableList<Client> filaClientes;
+	    
 
 	    @FXML
-	    void ordenarClientes(ActionEvent event) {
+	    private TableColumn<Client, String> tcName;
 
-	    }
+	    @FXML
+	    private TableColumn<Client, Integer> tcCedula;
+
+	    @FXML
+	    private TableColumn<Client, Double> tcMonto;
+	 
 
 	    /**
 	     * Inicializa la ventana con el ComboBox ya lleno.
 	     */
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
+			b = new Bank();	
+
 
 			agregarParametrosOrdenar();
 		}
+		
+		   @FXML
+		public void ordenarClientes(ActionEvent event) {
+			   if(cboxParametrosOrdenar.getValue().equals("CEDULA")) {
+				   b.sortById();
+				   ordenarPorCedula();
+				   System.out.println("xd");
+			   }
+			   else if(cboxParametrosOrdenar.getValue().equals("NOMBRE")) {
+				   b.sortClientsByName();
+				   ordenarPorNombre();
+				   System.out.println("xd2");
+			   }
+		}
+		   
+		public void ordenarPorCedula() {
+			ArrayList<Client> customers = b.getCustomers();
+			filaClientes = FXCollections.observableArrayList(customers);
+			tvClientes.setItems(filaClientes);
+	    	tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
+	    	tcCedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
 
+		}
+		public void ordenarPorNombre() {
+			ArrayList<Client> customers = b.getCustomers();
+			filaClientes = FXCollections.observableArrayList(customers);
+			tvClientes.setItems(filaClientes);
+			tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
+	    	tcCedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
+		}
 
 		/**
 		 * Este método llena el ComboBox con las opciones para ordenar.
@@ -57,6 +102,6 @@ import javafx.scene.control.TableView;
 			cboxParametrosOrdenar.setItems(te);
 			
 		}
-		
+
 
 	}

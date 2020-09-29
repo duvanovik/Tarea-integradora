@@ -124,7 +124,7 @@ public class Bank {
 		ba=new BankAccount("1247-9762", 3330000);
 		client= new Client("Ana Villada", 44444, 65, ba, "12-12-2012", "18-May-2009",new CreditCard(0));
 		hasMBaseDatosClientes.put(client.getCedula(), client);
-		
+		customers.add(client);
 	
 	}
 	/**
@@ -304,6 +304,12 @@ public class Bank {
 
 		}
 	
+	public ArrayList<Client> getCustomers() {
+			return customers;
+		}
+
+
+
 	/**
 	 * Con este método mostramos los clientes que desertaron del banco.
 	 * @param 
