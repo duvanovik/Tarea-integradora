@@ -204,8 +204,8 @@ public class Principal_WindowController implements Initializable{
     	
     	tvClientePrevioAtenderNombre.setCellValueFactory(new PropertyValueFactory<>("name"));
     	tvClientePrevioAtenderCedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
-    	tvClientePrevioAtenderCuentaBancaria.setCellValueFactory(new PropertyValueFactory<>("bankAccount"));
-    	tvClientePrevioAtenderTarjetas.setCellValueFactory(new PropertyValueFactory<>("creditCards"));
+    	tvClientePrevioAtenderCuentaBancaria.setCellValueFactory(new PropertyValueFactory<>("bankAccount1"));
+    	tvClientePrevioAtenderTarjetas.setCellValueFactory(new PropertyValueFactory<>("tarjetaDeCredito1"));
     	tvClientePrevioAtenderFechaPago.setCellValueFactory(new PropertyValueFactory<>("datePaymentCard"));
     	tvClientePrevioAtenderIncorporacion.setCellValueFactory(new PropertyValueFactory<>("dateIncorporation"));
    

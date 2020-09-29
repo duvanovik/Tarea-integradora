@@ -321,13 +321,15 @@ public class Bank {
 	/**
 	 * Con este método mostramos los clientes que desertaron del banco.
 	 * @param 
-	 * @return
+	 * @return los clientes
 	 * @author Andres Cuellar
 	 */
-	public void mostrarDesertores() {
+	public String mostrarDesertores() {
+		String desertores="";
 		for (int i = 0; i < desertor.size(); i++) {
-			System.out.println(desertor.get(i).getName());
+			desertores +=desertor.get(i).getName();
 		}
+		return desertores;
 	}
 
 	

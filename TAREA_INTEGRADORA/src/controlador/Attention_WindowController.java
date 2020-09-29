@@ -206,8 +206,8 @@ public class Attention_WindowController{
 
 		tcNombre.setCellValueFactory(new PropertyValueFactory<>("name"));
 		tcCedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
-		tcCuentaBancaria.setCellValueFactory(new PropertyValueFactory<>("bankAccount"));
-		tcTarjeta.setCellValueFactory(new PropertyValueFactory<>("creditCards"));
+		tcCuentaBancaria.setCellValueFactory(new PropertyValueFactory<>("bankAccount1"));
+		tcTarjeta.setCellValueFactory(new PropertyValueFactory<>("tarjetaDeCredito1"));
 		tcFechaPago.setCellValueFactory(new PropertyValueFactory<>("datePaymentCard"));
 		tcIncorporacion.setCellValueFactory(new PropertyValueFactory<>("dateIncorporation"));
 

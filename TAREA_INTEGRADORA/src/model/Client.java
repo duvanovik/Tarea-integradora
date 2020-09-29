@@ -111,6 +111,9 @@ public class Client implements Cloneable{
 	public BankAccount getBankAccount() {
 		return bankAccount;
 	}
+	public int getBankAccount1() {
+		return bankAccount.getAmmount();
+	}
 	public void setBankAccount(BankAccount bankAccount) {
 		this.bankAccount = bankAccount;
 	}
@@ -146,6 +149,9 @@ public class Client implements Cloneable{
 	}
 	public CreditCard getTarjetaDeCredito() {
 		return tarjetaDeCredito;
+	}
+	public int getTarjetaDeCredito1() {
+		return tarjetaDeCredito.getDeuda();
 	}
 	public void setTarjetaDeCredito(CreditCard tarjetaDeCredito) {
 		this.tarjetaDeCredito = tarjetaDeCredito;
