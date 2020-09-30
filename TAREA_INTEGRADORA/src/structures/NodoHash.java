@@ -1,54 +1,25 @@
 package structures;
 
-public class NodoHash<T> {
-
-	private NodoHash next;
-	T valor;
-	int key;
-	int position;
+public class NodoHash<K,V> {
+	K Actualkey;
+	V value;
 	
-	public NodoHash(T valor, int key) {
-		this.next=null;
-		this.valor=valor;
-		this.key=key;
-		this.position=0;
-	
-	}
-
-	public int getPosition() {
-		return position;
-	}
-
-	public void setPosition(int position) {
-		this.position = position;
-	}
-
-	public NodoHash getPrev() {
-		return next;
-	}
-
-	public void setPrev(NodoHash prev) {
-		this.next = prev;
-	}
-
-	public T getValor() {
-		return valor;
-	}
-
-	public void setValor(T valor) {
-		this.valor = valor;
-	}
-
-	public int getKey() {
-		return key;
-	}
-
-	public void setKey(int key) {
-		this.key = key;
+	public NodoHash(K actualkey, V value) {
+		Actualkey = actualkey;
+		this.value = value;
 	}
 	
-	
-	
-	
+	public K getActualkey() {
+		return Actualkey;
+	}
+	public void setActualkey(K actualkey) {
+		Actualkey = actualkey;
+	}
+	public V getValue() {
+		return value;
+	}
+	public void setValue(V value) {
+		this.value = value;
+	}
 	
 }

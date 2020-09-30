@@ -125,7 +125,7 @@ public class Principal_WindowController implements Initializable{
         	alert.showAndWait();
     	}else {
     		
-    		if(bank.getHm().containsKey(Integer.parseInt(tfCedula.getText()))) {
+    		if(bank.getHm().contains(Integer.parseInt(tfCedula.getText()))) {
     			int key=Integer.parseInt(tfCedula.getText().toString());
     			Client client=bank.getHm().get(key);
     			

@@ -2,13 +2,13 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.JOptionPane;
 
 
 import structures.Cola;
+import structures.HashMap;
 
 public class Bank {
 
@@ -137,7 +137,7 @@ public class Bank {
 	
 	public void cancelarCuenta() {
 		Client client= hasMBaseDatosClientes.get(enAtencion.getCedula());
-		hasMBaseDatosClientes.remove(client.getCedula());
+		hasMBaseDatosClientes.delete(client.getCedula());
 		setEnAtencion(null);
 		desertor.add(client);
 	}
