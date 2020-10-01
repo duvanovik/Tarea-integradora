@@ -12,7 +12,6 @@ import structures.HashMap;
 
 public class Bank {
 
-	//Este HashMap hay que reemplazarla por la de implementación propia.
 	private HashMap<Integer, Client> hasMBaseDatosClientes ;
 	
 	private Cola<Client> fila;

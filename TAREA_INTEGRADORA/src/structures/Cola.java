@@ -7,7 +7,6 @@ public class Cola<T> {
 	private NodoCola inicioCola,finalCola;
 	private int tamano;
 	
-	private String cola="";
 	public Cola() {
 		inicioCola=null;
 		finalCola=null;
@@ -75,24 +74,6 @@ public class Cola<T> {
 	
 
 
-	public void mostrarContenido() {
-		NodoCola recorrido= inicioCola;
-		String colaInvertida="";
-		
-		while(recorrido!=null) {
-			cola+=recorrido.elemento+" ";
-			recorrido=recorrido.siguiente;
-		}
-		
-		String cadena[] = cola.split(" ");
-		
-		for(int i=cadena.length-1;i>=0;i--) {
-			colaInvertida+=" "+cadena[i];
-		}
-		
-		JOptionPane.showMessageDialog(null, colaInvertida);
-		cola="";
-	}
 
 	public NodoCola getInicioCola() {
 		return inicioCola;
