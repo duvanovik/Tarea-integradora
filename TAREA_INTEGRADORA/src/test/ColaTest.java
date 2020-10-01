@@ -11,13 +11,13 @@ public class ColaTest {
 	private Cola<Integer> cola; 
 	
 	
-	private void setUp1() {
+	private void setupScenary1() {
 
 		cola=new Cola<Integer>();
 		
 	}
 	
-	private void setUp2() {
+	private void setupScenary2() {
 
 		cola=new Cola<Integer>();
 		cola.insertar(9);
@@ -30,7 +30,7 @@ public class ColaTest {
 	
 	@Test
 	public void insertar() {
-		setUp1();
+		setupScenary1();
 		int numero=9;
 		int sizeAntes=cola.getTamano();
 		cola.insertar(numero);
@@ -41,7 +41,7 @@ public class ColaTest {
 		assertTrue(numero==(Integer)cola.getFinalCola().getElemento());
 		
 		
-		setUp2();
+		setupScenary2();
 		numero=3;
 		cola.insertar(numero);
 		assertTrue(numero==(Integer)cola.getFinalCola().getElemento());
@@ -53,14 +53,14 @@ public class ColaTest {
 	
 	@Test
 	public void extraer() {
-		setUp2();
+		setupScenary2();
 		int primeroEnEntrar=(Integer)cola.getInicioCola().getElemento();
 		int extraerPrimero=cola.extraer();
 				
 		assertTrue(primeroEnEntrar==extraerPrimero);
 		
 		
-		setUp1();
+		setupScenary1();
 		Object extraido=cola.extraer();
 		assertTrue(extraido==null);
 	}
