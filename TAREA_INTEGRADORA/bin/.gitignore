@@ -1,3 +1,7 @@
-/test/
-/structures/
+/controlador/
+/excepciones/
 /interfaces/
+/model/
+/structures/
+/test/
+/vista/

@@ -63,17 +63,17 @@ import model.Client;
 			   if(cboxParametrosOrdenar.getValue().equals("CEDULA")) {
 				   b.sortById();
 				   ordenarPorCedula();
-				   System.out.println("xd");
+				   
 			   }
 			   else if(cboxParametrosOrdenar.getValue().equals("NOMBRE")) {
 				   b.sortClientsByName();
 				   ordenarPorNombre();
-				   System.out.println("xd2");
+				   
 			   }
 			   else if(cboxParametrosOrdenar.getValue().equals("MONTO")) {
 				   b.sortByAmount();
 				   ordenarPorMonto();
-				   System.out.println("xd3");
+				  
 			   }
 		}
 		   
@@ -111,7 +111,6 @@ import model.Client;
 			List<String> parametros=new ArrayList<String>();
 			ObservableList<String> te;
 			parametros.add("CEDULA");
-			parametros.add("TIEMPO");
 			parametros.add("NOMBRE");
 			parametros.add("MONTO");
 			te=FXCollections.observableArrayList(parametros);

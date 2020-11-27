@@ -164,6 +164,18 @@ public class Client implements Cloneable{
 	public void setCopiaOperaciones(Stack<Client> copiaOperaciones) {
 		this.copiaOperaciones = copiaOperaciones;
 	}
+	public int compararPorNombre(Client c) {
+	    int valorComparacion = name.compareToIgnoreCase( c.getName() );
+	      if(valorComparacion < 0){
+	        valorComparacion = -1;
+	      }else if(valorComparacion == 0){
+	        valorComparacion = 0;
+	      }else{
+	        valorComparacion = 1;
+	      }
+	        return valorComparacion;
+	  }
+
 	public int compararPorId(Client c) {
 		if(cedula == c.getCedula())
 			return 0;

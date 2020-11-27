@@ -221,7 +221,34 @@ public class Bank {
 	        }
 	    }
 		public void sortClientsByName() {       
-			divide(0, customers.size()-1);
+			//divide(0, customers.size()-1);
+			int initial;
+
+	        for( initial = 0; initial < customers.size( ); initial++ )
+	        {
+	            int minorPosition = initial;
+	            Client minorCustomer = ( Client )customers.get( initial );
+
+	            // Buscar el perro de menor edad entre inicial y final
+	            for( int i = initial + 1; i < customers.size( ); i++ )
+	            {
+	                Client positionCustomer = ( Client )customers.get( i );
+
+	                if( positionCustomer.compararPorNombre(minorCustomer ) < 0 )
+	                {
+	                    minorCustomer = positionCustomer;
+	                    minorPosition = i;
+	                }
+	            }
+
+	            if( minorPosition != initial )
+	            {
+	                Client temp = ( Client )customers.get( initial );
+	                customers.set( initial, minorCustomer );
+	                customers.set( minorPosition, temp );
+	            }
+
+	        }
 	    }
 		private void divide(int start,int end){
 	        

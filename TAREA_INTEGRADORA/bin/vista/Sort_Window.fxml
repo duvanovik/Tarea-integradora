@@ -37,7 +37,6 @@
          <columns>
             <TableColumn fx:id="tcName" prefWidth="168.0" text="Nombre" />
             <TableColumn fx:id="tcCedula" prefWidth="158.0" text="Cedula" />
-            <TableColumn prefWidth="147.0" text="Tiempo Vinculación" />
             <TableColumn fx:id="tcAmount" prefWidth="163.0" text="Monto" />
          </columns>
       </TableView>
